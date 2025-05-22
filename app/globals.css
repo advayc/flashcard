@@ -1,0 +1,419 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-black text-foreground;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Optimize image rendering */
+  img {
+    @apply max-w-full h-auto;
+    content-visibility: auto;
+  }
+
+  /* Optimize animations */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .sky-border {
+    @apply border border-skyBlue/30 hover:border-skyBlue/50 transition-colors;
+  }
+
+  .sky-button {
+    @apply relative inline-flex items-center justify-center px-4 py-2 overflow-hidden font-medium transition-all bg-black rounded-md hover:bg-opacity-80 group;
+  }
+
+  .sky-button::after {
+    content: "";
+    @apply absolute top-0 left-0 w-full h-full rounded-md border border-skyBlue;
+    transition: all 0.3s ease;
+  }
+
+  .sky-button:hover::after {
+    @apply border-skyBlue/80;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+  }
+
+  .sky-text {
+    @apply text-skyBlue;
+  }
+
+  .sky-card {
+    @apply bg-black border border-skyBlue/20 hover:border-skyBlue/40 transition-all duration-300;
+  }
+
+  .sky-input {
+    @apply bg-black border-skyBlue/20 focus:border-skyBlue/50 focus:ring-1 focus:ring-skyBlue/30 transition-all duration-300;
+  }
+}
+
+/* Improved Card flip animation with hardware acceleration */
+.card-flip {
+  perspective: 1500px;
+  width: 100%;
+  will-change: transform;
+}
+
+.card-flip-inner {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.card-flip.flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+.card-front {
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Custom scrollbar - optimized for performance */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 165, 233, 0.6);
+}
+
+/* Optimized transitions */
+.transition-optimized {
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  will-change: transform, opacity;
+}
+
+/* GitHub-style contribution colors */
+.contribution-level-0 {
+  @apply bg-gray-800;
+}
+
+.contribution-level-1 {
+  @apply bg-[#0e4429];
+}
+
+.contribution-level-2 {
+  @apply bg-[#006d32];
+}
+
+.contribution-level-3 {
+  @apply bg-[#26a641];
+}
+
+.contribution-level-4 {
+  @apply bg-[#39d353];
+}
+
+/* Loading skeleton animation - optimized */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Enhanced color-coded feedback animations */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+  transform-origin: left;
+}
+
+.animate-glow {
+  animation: glow 2s infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+.skeleton {
+  @apply bg-gray-800;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: opacity;
+}
+
+/* Accuracy level colors */
+.accuracy-perfect {
+  @apply bg-gradient-to-r from-green-500 to-emerald-400;
+}
+
+.accuracy-good {
+  @apply bg-gradient-to-r from-blue-500 to-cyan-400;
+}
+
+.accuracy-partial {
+  @apply bg-gradient-to-r from-yellow-500 to-amber-400;
+}
+
+.accuracy-incorrect {
+  @apply bg-gradient-to-r from-red-500 to-rose-400;
+}
+
+/* Lazy loading images */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+/* Content visibility for off-screen elements */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* GitHub-style contribution graph styles */
+.contribution-graph-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.month-labels-container {
+  display: flex;
+  position: relative;
+  height: 20px;
+}
+
+.month-labels {
+  flex: 1;
+  position: relative;
+}
+
+.month-label {
+  position: absolute;
+  font-size: 12px;
+  color: #8b949e;
+  top: 0;
+}
+
+.graph-container {
+  display: flex;
+  margin-top: 4px;
+}
+
+.day-labels {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 12px;
+  color: #8b949e;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.day-labels span {
+  height: 15px;
+  line-height: 15px;
+  margin-bottom: 3px;
+}
+
+.cells-container {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.week-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contribution-cell {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contribution-cell:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.legend-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #8b949e;
+}
+
+.legend-cells {
+  display: flex;
+  gap: 3px;
+}
+
+.legend-cell {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+/* Make contribution icons larger */
+.contribution-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cells-container {
+    min-width: 700px;
+  }
+}
