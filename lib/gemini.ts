@@ -1,6 +1,6 @@
 // Fallback API key for preview/development
 const geminiApiKey =
-  process.env.GEMINI_API_KEY || process.env.GEMENI_API_KEY || "AIzaSyDUe27y9D5m-7zqiIUatlmkvv9oLh3WBDA"
+  process.env.GEMINI_API_KEY
 
 // Cache for API responses to avoid redundant calls
 const apiCache = new Map()
